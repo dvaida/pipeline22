@@ -33,9 +33,10 @@ pipelines:
             - export VERSION=$(poetry version | awk '{print $2}')
             - rm -Rf kubernetes/deploy && mkdir kubernetes/deploy && cp kubernetes/*.yaml kubernetes/deploy/
             - sed 's/__VERSION__/'$VERSION'/g' kubernetes/kustomization.yaml > kubernetes/deploy/kustomization.yaml
-            - git add kubernetes/deploy && git commit -am "Version bump to $VERSION [skip ci]" && git push origin master
+            - git add kubernetes/deploy && git commit -am "Version bump to $VERSION [skip ci]"
             - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
             - docker build -t dvaida/pipeline22:$VERSION .
             - docker push dvaida/pipeline22:$VERSION
+            - git push origin master # Will trigger deploy
           services:
             - docker
