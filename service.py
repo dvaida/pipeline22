@@ -5,4 +5,4 @@ app = FastAPI()
 
 @app.get("/tree")
 def tree():
-    return {"favourite_tree": "oak"}
+    return {"favourite_tree": "pine"}
