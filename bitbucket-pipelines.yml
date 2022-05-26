@@ -16,8 +16,7 @@ pipelines:
             - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
             - pip install pytest
             - pytest -v tests/* --junitxml=test-reports/report.xml
-          services:
-            - docker
+
       - step:
           name: Lint code
           script:
@@ -26,8 +25,6 @@ pipelines:
             - flake8 . --extend-exclude=dist,build --show-source --statistics
       - step:
           name: Docker
-          caches:
-            - pip
           script:
             - poetry version patch
             - export VERSION=$(poetry version | awk '{print $2}')
