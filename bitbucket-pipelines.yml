@@ -17,7 +17,7 @@ pipelines:
             - pip install pytest
             - pytest -v tests/* --junitxml=test-reports/report.xml
             - poetry version patch
-            - export VERSION=$(poetry version | awk '{print $1":"$2}')
+            - export VERSION=$(poetry version | awk '{print $2}')
             - sed -i 's/__VERSION__/'$VERSION'/g' kubernetes/kustomization.yaml
             - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
             - docker build -t dvaida/pipeline22:$VERSION .
