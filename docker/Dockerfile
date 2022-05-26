@@ -10,4 +10,4 @@ COPY *.py /app
 
 ENV PORT=8080
 ENV TREE="pine"
-CMD ["uvicorn", "service:app", "--port", "$PORT", "--host", "0.0.0.0"]
+CMD ["sh", "-c", "uvicorn service:app --port $PORT --host 0.0.0.0"]
