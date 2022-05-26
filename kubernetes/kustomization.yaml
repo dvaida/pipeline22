@@ -1,5 +1,6 @@
 resources:
 - tree-app-deployment.yaml
+- tree-app-service.yaml
 
 images:
 - name: dvaida/pipeline22
