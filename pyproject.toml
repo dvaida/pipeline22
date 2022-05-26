@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "pipeline22"
+version = "0.1.1"
+description = ""
+authors = ["Dorel Vaida <dorel.vaida@adaptiv.software>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
