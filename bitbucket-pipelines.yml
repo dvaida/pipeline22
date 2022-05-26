@@ -27,6 +27,7 @@ pipelines:
           name: Docker
           caches:
             - pip
+            - docker
           script:
             - pip install -r requirements.txt
             - poetry version patch
