@@ -13,7 +13,7 @@ pipelines:
           caches:
             - pip
           script:
-            - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+            - pip install -r requirements.txt
             - pip install pytest
             - pytest -v tests/* --junitxml=test-reports/report.xml
 
@@ -25,7 +25,10 @@ pipelines:
             - flake8 . --extend-exclude=dist,build --show-source --statistics
       - step:
           name: Docker
+          caches:
+            - pip
           script:
+            - then pip install -r requirements.txt
             - poetry version patch
             - export VERSION=$(poetry version | awk '{print $2}')
             - rm -Rf kubernetes/deploy && mkdir kubernetes/deploy && cp kubernetes/*.yaml kubernetes/deploy/
