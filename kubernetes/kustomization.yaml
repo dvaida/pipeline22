@@ -1,6 +1,0 @@
-resources:
-- tree-app-deployment.yaml
-
-images:
-- name: dvaida/pipeline22
-  newTag: __VERSION__
