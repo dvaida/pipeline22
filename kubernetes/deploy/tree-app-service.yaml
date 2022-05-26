@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: tree-app-deployment
+  name: tree-app-service
+  namespace: pipeline22
+spec:
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  type: NodePort
+  ports:
+  - nodePort: 30003
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: tree-app-deployment
+  sessionAffinity: None
+status:
+  loadBalancer: {}
