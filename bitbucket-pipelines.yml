@@ -16,6 +16,19 @@ pipelines:
             - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
             - pip install pytest
             - pytest -v tests/* --junitxml=test-reports/report.xml
+          services:
+            - docker
+      - step:
+          name: Lint code
+          script:
+            # Enforce style consistency across Python projects https://flake8.pycqa.org/en/latest/manpage.html
+            - pip install flake8
+            - flake8 . --extend-exclude=dist,build --show-source --statistics
+      - step:
+          name: Docker
+          caches:
+            - pip
+          script:
             - poetry version patch
             - export VERSION=$(poetry version | awk '{print $2}')
             - rm -Rf kubernetes/deploy && mkdir kubernetes/deploy && cp kubernetes/*.yaml kubernetes/deploy/
@@ -26,9 +39,3 @@ pipelines:
             - docker push dvaida/pipeline22:$VERSION
           services:
             - docker
-      - step:
-          name: Lint code
-          script:
-            # Enforce style consistency across Python projects https://flake8.pycqa.org/en/latest/manpage.html
-            - pip install flake8
-            - flake8 . --extend-exclude=dist,build --show-source --statistics
