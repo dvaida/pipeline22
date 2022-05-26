@@ -19,17 +19,14 @@ pipelines:
             - poetry version patch
             - export VERSION=$(poetry version | awk '{print $1":"$2}')
             - sed -i 's/__VERSION__/'$VERSION'/g' kubernetes/kustomization.yaml
+            - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+            - docker build -t dvaida/pipeline22:$VERSION .
+            - docker push dvaida/pipeline22:$VERSION
+          services:
+            - docker
       - step:
           name: Lint code
           script:
             # Enforce style consistency across Python projects https://flake8.pycqa.org/en/latest/manpage.html
             - pip install flake8
             - flake8 . --extend-exclude=dist,build --show-source --statistics
-    - step:
-        name: Docker Build
-        script:
-          - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
-          - docker build -t dvaida/pipeline22:0.0.1 .
-          - docker push dvaida/pipeline22:0.0.1
-        services:
-          - docker
