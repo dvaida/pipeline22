@@ -3,4 +3,4 @@ resources:
 
 images:
 - name: dvaida/pipeline22
-  newTag: 0.1.2
+  newTag: __VERSION__
