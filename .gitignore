@@ -48,3 +48,5 @@ Thumbs.db
 *.mov
 *.wmv
 
+# Virtualenv in local/dev python envs
+venv 
