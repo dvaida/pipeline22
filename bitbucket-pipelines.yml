@@ -16,6 +16,9 @@ pipelines:
             - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
             - pip install pytest
             - pytest -v tests/* --junitxml=test-reports/report.xml
+            - poetry version patch
+            - export VERSION=$(poetry version | awk '{print $1":"$2}')
+            - sed -i 's/__VERSION__/'$VERSION'/g' kubernetes/kustomization.yaml
       - step:
           name: Lint code
           script:
