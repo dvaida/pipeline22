@@ -5,3 +5,12 @@ For proof of concepts I'm more comfortable with Flask but FastAPI seems to have 
 
 Chose pip + requirements.txt for simplicity, but I will obviously go with any build stack already available
 
+I will place this directly in master for simplicity, but the simplest I've seen is to keep a development branch
+and merge stable stuff to master through pull requests when ready / needs build + release.
+Next simplest is to have deployment branches for staging / prod, and merge to those through pull requests
+while keeping master fully automated: build + deploy to dev env
+Dev culture varies so much across organizations that I became un-opinionated on this and just make recommendations
+based on personal experience when needed.
+
+
+
