@@ -1,6 +1,7 @@
 resources:
 - tree-app-deployment.yaml
+- tree-app-service.yaml
 
 images:
 - name: dvaida/pipeline22
-  newTag: 0.1.11
+  newTag: 0.1.12
