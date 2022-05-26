@@ -9,4 +9,5 @@ RUN pip install -r requirements.txt
 COPY *.py /app
 
 ENV PORT=8080
-CMD ["uvicorn", "service:app", "--port", "8080", "--host", "0.0.0.0"]
+ENV TREE="pine"
+CMD ["uvicorn", "service:app", "--port", "$PORT", "--host", "0.0.0.0"]
