@@ -20,6 +20,9 @@ based on personal experience when needed.
 I've used poetry to version bump and a small shell script to replace the image version in the generated
 deployment artefacts (further to be merged by kustomize)
 
+I've chosen to build a Docker image and configure it through ENV vars, but there's more to a 12 factor app. Still,
+it's a start.
+
 ### Delivery / Deployment
 
 I've chosen the Kubernetes deployment artefacts to be in the same repo as the code instead of separate repos.
