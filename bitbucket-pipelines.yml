@@ -19,6 +19,7 @@ pipelines:
             - poetry version patch
             - export VERSION=$(poetry version | awk '{print $2}')
             - sed -i 's/__VERSION__/'$VERSION'/g' kubernetes/kustomization.yaml
+            - git commit -am "Version bump to $VERSION" && git push origin master
             - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
             - docker build -t dvaida/pipeline22:$VERSION .
             - docker push dvaida/pipeline22:$VERSION
