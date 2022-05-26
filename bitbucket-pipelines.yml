@@ -28,7 +28,7 @@ pipelines:
           caches:
             - pip
           script:
-            - then pip install -r requirements.txt
+            - pip install -r requirements.txt
             - poetry version patch
             - export VERSION=$(poetry version | awk '{print $2}')
             - rm -Rf kubernetes/deploy && mkdir kubernetes/deploy && cp kubernetes/*.yaml kubernetes/deploy/
