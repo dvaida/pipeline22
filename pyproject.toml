@@ -1,10 +1,6 @@
 [tool.poetry]
 name = "pipeline22"
-<<<<<<< HEAD
-version = "0.1.22"
-=======
-version = "0.1.17"
->>>>>>> 9baf8260cf12801b6b4c012eca8b3a1c50706f3a
+version = "0.1.23"
 description = ""
 authors = ["Dorel Vaida <dorel.vaida@adaptiv.software>"]
 
