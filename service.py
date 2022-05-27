@@ -4,7 +4,7 @@ import os
 app = FastAPI()
 
 
-@app.get("/tree")
+@app.get("/")
 def tree():
     tree_name = os.environ.get("TREE", "pine")
     return {"favourite_tree": tree_name}
