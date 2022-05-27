@@ -10,10 +10,9 @@ spec:
   ipFamilies:
   - IPv4
   ipFamilyPolicy: SingleStack
-  type: NodePort
+  type: LoadBalancer
   ports:
-  - nodePort: 30003
-    port: 8080
+  - port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
