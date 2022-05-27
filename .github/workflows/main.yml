@@ -1,4 +1,4 @@
-# Demo Bitbucket pipeline
+# Demo Github pipeline
 name: Docker Build
 
 on:
@@ -7,13 +7,13 @@ on:
   pull_request:
     branches: [ master ]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Checkout the code
       - uses: actions/checkout@v3
 
       - name: Lint
@@ -31,14 +31,20 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Docker Build / Push
         run: |
-          # pip install -r requirements.txt
+          # Version / patch bump
           poetry version patch
+          # Extract version
           export VERSION=$(poetry version | awk '{print $2}')
+          # Cleanup and refresh deployment artefacts
           rm -Rf kubernetes/deploy && mkdir kubernetes/deploy && cp kubernetes/*.yaml kubernetes/deploy/
-          sed 's/__VERSION__/'$VERSION'/g' kubernetes/kustomization.yaml > kubernetes/deploy/kustomization.yaml
+          # Replace version in deployment
+          sed 's/__VERSION__/'$VERSION'/g' kubernetes/kustomization.yaml > kubernetes/deploy/kustomization.yaml # Replace version
+          # Setup Github actions, commit the deployment artefacts
           git config user.name "GitHub Actions"
           git config user.email "<>"
           git add kubernetes/deploy && git commit -am "Version bump to $VERSION [skip ci]"
+          # Docker build and push
           docker build -t ${{ secrets.DOCKER_HUB_USER }}/pipeline22:$VERSION -f docker/Dockerfile .
           docker push ${{ secrets.DOCKER_HUB_USER }}/pipeline22:$VERSION
-          git push origin master # Will trigger deploy to Argo
+          # Git push. Will trigger deploy to Argo
+          git push origin master
