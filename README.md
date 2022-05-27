@@ -57,3 +57,11 @@ However, in prod we'd probably want to parametrize more environments (e.g. maste
 staging branch deploys to staging and production branch deploys to production), adding pull requests and reviews
 into the mix; and versioning - ability to provide the entire version or specify minor / major bump besides patch.
 
+### Other important things to look into
+
+ * Liveness / readiness probes
+ * Metrics / observability
+ * Resource limits (rather set cluster wide unusably small limits to force pods to specify their resources)
+ * Supply chain security (Docker image scan at build time + image origin at Kubernetes deploy time)
+ * Network policies to restrict communication to a minimum even within the cluster
+
