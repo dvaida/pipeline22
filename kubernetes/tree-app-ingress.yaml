@@ -3,16 +3,18 @@ kind: Ingress
 metadata:
   name: pipeline22-ingress
   namespace: pipeline22
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
-  - http:
+  - host: demo.localdev.me
+    http:
       paths:
-      - path: /tree
-        pathType: Prefix
-        backend:
+      - backend:
           service:
             name: tree-app-service
             port:
               number: 8080
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer: {}
