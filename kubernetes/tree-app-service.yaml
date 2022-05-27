@@ -6,10 +6,6 @@ metadata:
   name: tree-app-service
   namespace: pipeline22
 spec:
-  externalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
   type: ClusterIP
   ports:
   - port: 8080
