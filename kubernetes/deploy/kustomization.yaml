@@ -4,4 +4,8 @@ resources:
 
 images:
 - name: dvaida/pipeline22
+<<<<<<< HEAD
   newTag: 0.1.22
+=======
+  newTag: 0.1.17
+>>>>>>> 9baf8260cf12801b6b4c012eca8b3a1c50706f3a
