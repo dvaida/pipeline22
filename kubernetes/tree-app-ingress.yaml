@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: demo.localdev.me
+  - host: 35.204.222.132.sslip.io
     http:
       paths:
       - backend:
@@ -14,7 +14,7 @@ spec:
             name: tree-app-service
             port:
               number: 8080
-        path: /
+        path: /tree
         pathType: Prefix
 status:
   loadBalancer: {}
